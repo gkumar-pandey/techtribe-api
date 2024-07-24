@@ -54,3 +54,17 @@ export const decodeToken = (token) => {
   const decodedToken = jwt.verify(token, SECRET_KEY);
   return decodedToken;
 };
+
+/**
+ * @description Extracts the user ID from a decoded JWT (JSON Web Token) payload.
+ * @param {Object} decodedToken - The decoded JWT token containing user information.
+ * @returns {String} - The user ID extracted from the token.
+ * @throws {Error} - If the user ID is missing or invalid in the token.
+ */
+export const extractUserIdFromToken = (decodedToken) => {
+  if (decodedToken && decodedToken._id) {
+    return decodedToken._id;
+  } else {
+    throw new Error("Invalid or missing user id in token");
+  }
+};
